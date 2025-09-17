@@ -1,4 +1,21 @@
+
+
 pipeline {
+    agent any
+    stages {
+        stage('Diagnose Python') {
+            steps {
+                sh '''
+                    echo "Checking Python installations..."
+                    which python || echo "python not found"
+                    which python3 || echo "python3 not found"
+                    which py || echo "py not found"
+                    ls /usr/bin/python* || echo "No Python in /usr/bin/"
+                    echo "PATH is: $PATH"
+                '''
+            }
+        }
+        pipeline {
     agent any
     environment {
         PROJECT = 'travel-memory-backend'
@@ -51,5 +68,7 @@ pipeline {
                 to: "your-email@example.com"
             )
         }
+    }
+}
     }
 }
