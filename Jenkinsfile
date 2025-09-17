@@ -22,15 +22,15 @@ pipeline {
         stage('Build') {
             steps {
                 dir('backend') {
-                    sh 'python -m pip install --upgrade pip'
-                    sh 'python -m pip install -r requirements.txt'
+                    sh 'python3 -m pip install --upgrade pip'
+                    sh 'python3 -m pip install -r requirements.txt'
                 }
             }
         }
         stage('Test') {
             steps {
                 dir('backend') {
-                    sh 'python -m pytest --junitxml=test-results.xml -v'
+                    sh 'python3 -m pytest --junitxml=test-results.xml -v'
                 }
             }
             post {
