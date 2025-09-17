@@ -1,22 +1,8 @@
-
-
 pipeline {
     agent any
-    stages {
-        stage('Diagnose Python') {
-            steps {
-                sh '''
-                    echo "Checking Python installations..."
-                    which python || echo "python not found"
-                    which python3 || echo "python3 not found"
-                    which py || echo "py not found"
-                    ls /usr/bin/python* || echo "No Python in /usr/bin/"
-                    echo "PATH is: $PATH"
-                '''
-            }
-        }
-        pipeline {
-    agent any
+    tools {
+        python 'Python3'  // Must match the Name you configured
+    }
     environment {
         PROJECT = 'travel-memory-backend'
     }
@@ -25,14 +11,14 @@ pipeline {
             steps {
                 dir('backend') {
                     sh 'python -m pip install --upgrade pip'
-                    sh 'pip install -r requirements.txt'
+                    sh 'python -m pip install -r requirements.txt'
                 }
             }
         }
         stage('Test') {
             steps {
                 dir('backend') {
-                    sh 'pytest --junitxml=test-results.xml -v'
+                    sh 'python -m pytest --junitxml=test-results.xml -v'
                 }
             }
             post {
@@ -58,17 +44,15 @@ pipeline {
             emailext (
                 subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Check console output at ${env.BUILD_URL}",
-                to: "your-email@example.com"
+                to: "thekartikbaliyan12@gmail.com"
             )
         }
         success {
             emailext (
                 subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Build successful!",
-                to: "your-email@example.com"
+                to: "thekartikbaliyan12@gmail.com"
             )
         }
-    }
-}
     }
 }
