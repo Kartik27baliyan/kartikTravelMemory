@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        python 'Python3'  // Must match the Name you configured
+        python 'Python2'  // Must match the Name you configured
     }
     environment {
         PROJECT = 'travel-memory-backend'
