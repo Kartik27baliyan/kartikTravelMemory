@@ -26,7 +26,19 @@ Data format to be added:
 ```
 
 
-For frontend, you need to create `.env` file and put the following content (remember to change it based on your requirements):
+For frontend, you need to create `.env` file and put the following content (remember to change 
+it based on your requirements): ```bash REACT_APP_BACKEND_URL=http://localhost:3001 ```
+## Flask Application
+
+The backend is a Python Flask application running on port 5000.
+
+### Endpoints:
+- `GET /` - Welcome message
+- `GET /health` - Health check
+
+### Local Development:
 ```bash
-REACT_APP_BACKEND_URL=http://localhost:3001
-```
+cd backend
+pip install -r requirements.txt
+python app.py
+
