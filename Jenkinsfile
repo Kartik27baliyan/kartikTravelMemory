@@ -21,27 +21,26 @@ pipeline {
         }
         stage('Build') {
             steps {
-                dir('backend') 
-                         { sh ''' 
-                                   python3 -m venv venv
-                                    source venv/bin/activate
-                                   pip install --upgrade pip  
-                                  install -r requirements.txt
-                            '''
+                dir('backend') {
+                    sh '''
+                        # Create virtual environment using absolute path
+                        /usr/bin/python3 -m venv venv
+                        
+                        # Use the virtual environment's pip directly
+                        ./venv/bin/pip install --upgrade pip
+                        ./venv/bin/pip install -r requirements.txt
+                    '''
                 }
             }
         }
         stage('Test') {
             steps {
                 dir('backend') {
-                    sh ''' 
-
-                        source venv/bin/activate
-                        python3 -m pytest --junitxml=test-results.xml -v
-                        deactivate
+                    sh '''
+                        # Use the virtual environment's python directly
+                        ./venv/bin/python -m pytest --junitxml=test-results.xml -v
                     '''
                 }
-
             }
             post {
                 always {
