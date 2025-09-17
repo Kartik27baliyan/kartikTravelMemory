@@ -1,7 +1,8 @@
 pipeline {
     agent any
     tools {
-        python 'Python2'  // Must match the Name you configured
+        // USE THE FULL CLASS NAME - this is critical :cite[7]
+        'jenkins.plugins.shiningpanda.tools.PythonInstallation' 'Python3'
     }
     environment {
         PROJECT = 'travel-memory-backend'
@@ -34,7 +35,6 @@ pipeline {
             steps {
                 dir('backend') {
                     sh 'echo "Deploying to staging environment..."'
-                    // Add deployment commands here
                 }
             }
         }
@@ -44,14 +44,14 @@ pipeline {
             emailext (
                 subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Check console output at ${env.BUILD_URL}",
-                to: "thekartikbaliyan12@gmail.com"
+                to: "your-email@example.com"
             )
         }
         success {
             emailext (
                 subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: "Build successful!",
-                to: "thekartikbaliyan12@gmail.com"
+                to: "your-email@example.com"
             )
         }
     }
