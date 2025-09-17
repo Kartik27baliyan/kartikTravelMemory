@@ -1,13 +1,24 @@
 pipeline {
     agent any
     tools {
-        // USE THE FULL CLASS NAME - this is critical :cite[7]
         'jenkins.plugins.shiningpanda.tools.PythonInstallation' 'Python3'
     }
-    environment {
-        PROJECT = 'travel-memory-backend'
-    }
     stages {
+        stage('Diagnose Python') {
+            steps {
+                sh '''
+                    echo "=== Python Diagnostic Information ==="
+                    echo "PATH: $PATH"
+                    echo "Working directory: $(pwd)"
+                    echo "Python tool installation check:"
+                    which python || echo "python not found"
+                    which python3 || echo "python3 not found"
+                    ls /usr/bin/python* 2>/dev/null || echo "No Python in /usr/bin/"
+                    ls /usr/local/bin/python* 2>/dev/null || echo "No Python in /usr/local/bin/"
+                    echo "=== End Diagnostic ==="
+                '''
+            }
+        }
         stage('Build') {
             steps {
                 dir('backend') {
