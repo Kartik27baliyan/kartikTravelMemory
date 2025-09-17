@@ -21,17 +21,27 @@ pipeline {
         }
         stage('Build') {
             steps {
-                dir('backend') {
-                    sh 'python3 -m pip install --upgrade pip'
-                    sh 'python3 -m pip install -r requirements.txt'
+                dir('backend') 
+                         { sh ''' 
+                                   python3 -m venv venv
+                                    source venv/bin/activate
+                                   pip install --upgrade pip  
+                                  install -r requirements.txt
+                            '''
                 }
             }
         }
         stage('Test') {
             steps {
                 dir('backend') {
-                    sh 'python3 -m pytest --junitxml=test-results.xml -v'
+                    sh ''' 
+
+                        source venv/bin/activate
+                        python3 -m pytest --junitxml=test-results.xml -v
+                        deactivate
+                    '''
                 }
+
             }
             post {
                 always {
