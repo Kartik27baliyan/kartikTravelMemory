@@ -1,0 +1,15 @@
+MERN AWS Microservices Deployment Assignment Submission
+
+GitHub Repository: https://github.com/Kartik27baliyan/kartikTravelMemory
+
+Completed Components:
+- Docker containerization of MERN application
+- ECR repositories creation and image pushing
+- Jenkins EC2 instance provisioning
+- Infrastructure as Code scripts
+- Comprehensive documentation
+- Workarounds for learner account limitations
+
+Due to AWS learner account restrictions, some services (CodeCommit, SSH access) were documented with alternative approaches.
+
+All code, documentation, and configuration files are available in the GitHub repository.
