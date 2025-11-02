@@ -21,16 +21,20 @@ Load Balancer Node.js + React MongoDB
 ### 1. Initialize Terraform
 cd terraform
 terraform init
+
 2. Plan Infrastructure
 terraform plan
+
 3. Deploy Infrastructure
 terraform apply
+
 4. Access Application
 After deployment, Terraform will output:
 
 Web Server Public IP
 Database Server Private IP
 SSH connection command
+
 5. Application URL
 Access your MERN application at: http://WEB_SERVER_PUBLIC_IP
 
